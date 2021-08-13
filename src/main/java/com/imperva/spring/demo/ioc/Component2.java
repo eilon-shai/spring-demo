@@ -6,17 +6,19 @@ import com.imperva.spring.demo.ioc.interfaces.IService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-//@Component
+@Component
 public class Component2 implements IComponent2 {
 
     private static final Logger logger = LoggerFactory.getLogger( Component2.class );
 
     @Autowired
+    //@Qualifier("service")
     IService2 service2;
 
     public Component2() {

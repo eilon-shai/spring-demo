@@ -15,7 +15,7 @@ public class AppConfig {
     private static final Logger logger = LoggerFactory.getLogger( AppConfig.class );
 
     //@Bean
-    public IService2 service2() {
+    public IService2 service2_2() {
         return new Service2();
     }
 
