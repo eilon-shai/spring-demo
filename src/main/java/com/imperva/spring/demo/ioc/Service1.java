@@ -35,4 +35,9 @@ public class Service1 implements IService1 {
     public void destroy(){
         logger.info("Service1 destroy");
     }
+
+    @Override
+    public String getName() {
+        return "service 1 name";
+    }
 }
