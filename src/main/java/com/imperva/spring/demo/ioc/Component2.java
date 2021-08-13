@@ -2,6 +2,7 @@ package com.imperva.spring.demo.ioc;
 
 import com.imperva.spring.demo.ioc.interfaces.IComponent2;
 import com.imperva.spring.demo.ioc.interfaces.IService1;
+import com.imperva.spring.demo.ioc.interfaces.IService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class Component2 implements IComponent2 {
     private static final Logger logger = LoggerFactory.getLogger( Component2.class );
 
     @Autowired
-    IService1 service1;
+    IService2 service2;
 
     public Component2() {
         logger.info("Component2 constructed");
