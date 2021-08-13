@@ -18,8 +18,11 @@ public class Service1 implements IService1 {
 
     private static final Logger logger = LoggerFactory.getLogger( Service1.class );
 
-    @Autowired
-    public Service1(IComponent2 component2) {
+    @Autowired()
+    IComponent2 component2;
+
+
+    public Service1() {
         logger.info("Service1 constructed: " + System.currentTimeMillis());
     }
 
