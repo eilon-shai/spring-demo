@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 public class AppConfig {
@@ -15,6 +16,7 @@ public class AppConfig {
     private static final Logger logger = LoggerFactory.getLogger( AppConfig.class );
 
     //@Bean
+    //@Primary
     public IService2 service2_2() {
         return new Service2();
     }
