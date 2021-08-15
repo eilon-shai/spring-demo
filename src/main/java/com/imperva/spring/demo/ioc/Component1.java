@@ -20,7 +20,7 @@ public class Component1 implements IComponent1 {
 
     private IService1 service1;
 
-    @Autowired
+    //@Autowired
     public Component1() {
         //this.service1 = service1;
         logger.info("component1 constructed");
