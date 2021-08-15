@@ -7,8 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+import org.springframework.web.context.annotation.ApplicationScope;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -18,6 +20,7 @@ public class Component1 implements IComponent1 {
 
     private static final Logger logger = LoggerFactory.getLogger( Component1.class );
 
+    //@Autowired
     private IService1 service1;
 
     @Autowired
@@ -32,7 +35,7 @@ public class Component1 implements IComponent1 {
 
     @PostConstruct
     public void post(){
-        logger.info("component1 init " + service1.toString());
+        logger.info("component1 init");
     }
 
     @PreDestroy
