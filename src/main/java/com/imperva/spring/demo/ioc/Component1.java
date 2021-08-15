@@ -19,11 +19,8 @@ public class Component1 implements IComponent1 {
     @Autowired
     private IService1 service1;
 
-    /*@Autowired
-    ApplicationContext applicationContext;*/
 
     public Component1() {
-        //this.service1 = service1;
         logger.info("component1 constructed");
     }
 
