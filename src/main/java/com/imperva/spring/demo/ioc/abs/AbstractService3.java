@@ -8,10 +8,16 @@ public class AbstractService3<T> {
 
     private static final Logger logger = LoggerFactory.getLogger( AbstractService3.class );
 
+    private Class<?> aClass;
+
     public AbstractService3() {
 
-        final Class<?> aClass = ResolvableType.forClass(getClass()).as(AbstractService3.class).resolveGenerics()[0];
-        logger.info("service3 class: " + aClass.getName());
+        aClass = ResolvableType.forClass(getClass()).as(AbstractService3.class).resolveGenerics()[0];
 
+    }
+
+    @Override
+    public String toString() {
+        return "service3 of type: " + aClass.getSimpleName();
     }
 }

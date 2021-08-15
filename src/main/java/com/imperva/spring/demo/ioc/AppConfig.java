@@ -1,15 +1,8 @@
 package com.imperva.spring.demo.ioc;
 
-import com.imperva.spring.demo.ioc.interfaces.IService1;
-import com.imperva.spring.demo.ioc.interfaces.IService2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.context.annotation.ApplicationScope;
 
 @Configuration
 public class AppConfig {
