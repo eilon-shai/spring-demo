@@ -5,6 +5,7 @@ import com.imperva.spring.demo.ioc.jpa.model.Person;
 import com.imperva.spring.demo.ioc.jpa.repositories.AddressRepository;
 import com.imperva.spring.demo.ioc.jpa.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

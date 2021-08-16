@@ -41,6 +41,7 @@ public class PersonPersonService implements IPersonService {
     @Transactional
     public void createPersons() {
         IntStream.rangeClosed(1,10).forEach(i-> {
+            logger.info("creating person {}",i);
             personServiceHelper.createPerson();
         });
     }
