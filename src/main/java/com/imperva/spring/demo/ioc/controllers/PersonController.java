@@ -38,5 +38,10 @@ public class PersonController {
         service.updatePerson(id);
     }
 
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAll(){
+        service.deleteAll();
+    }
 
 }

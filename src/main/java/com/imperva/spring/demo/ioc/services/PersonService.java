@@ -1,5 +1,6 @@
 package com.imperva.spring.demo.ioc.services;
 
+import com.imperva.spring.demo.ioc.events.PersonReadyEvent;
 import com.imperva.spring.demo.ioc.jpa.model.Address;
 import com.imperva.spring.demo.ioc.jpa.model.Person;
 import com.imperva.spring.demo.ioc.jpa.repositories.AddressRepository;
@@ -8,7 +9,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Async;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class PersonPersonService implements IPersonService {
+public class PersonService implements IPersonService {
 
     @Autowired
     PersonRepository personRepository;
@@ -31,12 +32,16 @@ public class PersonPersonService implements IPersonService {
     @Autowired
     PersonServiceHelper personServiceHelper;
 
-    private static final Logger logger = LoggerFactory.getLogger( PersonPersonService.class );
+    @Autowired
+    ApplicationEventPublisher applicationEventPublisher;
+
+    private static final Logger logger = LoggerFactory.getLogger( PersonService.class );
 
     public Person getPerson(Long id){
        return personRepository.findById(id).get();
     }
 
+    @Transactional
     public void createPerson(String name){
         final Person person = personRepository.save(new Person(name));
         person.getPhoneNumbers().add(randomPhoneNumber());
@@ -45,6 +50,8 @@ public class PersonPersonService implements IPersonService {
         addressRepository.save(address);
         person.getAddresses().add(address);
         personRepository.save(person);
+        personServiceHelper.updatePerson(person.getId());
+        //applicationEventPublisher.publishEvent(new PersonReadyEvent(person.getId()));
     }
 
     //@Transactional
@@ -72,6 +79,12 @@ public class PersonPersonService implements IPersonService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void deleteAll() {
+        addressRepository.deleteAll();
+        personRepository.deleteAll();
     }
 
     public void updatePhone(long id, String phone){

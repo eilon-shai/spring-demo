@@ -10,4 +10,8 @@ public interface IPersonService {
 
     void updatePerson(Long id);
 
+    void updateName(long id, String name);
+
+    void deleteAll();
+
 }
