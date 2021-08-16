@@ -1,6 +1,6 @@
 package com.imperva.spring.demo.ioc.services;
 
-import com.imperva.spring.demo.ioc.events.PersonReadyEvent;
+import com.imperva.spring.demo.ioc.events.PersonRollBack;
 import com.imperva.spring.demo.ioc.jpa.model.Address;
 import com.imperva.spring.demo.ioc.jpa.model.Person;
 import com.imperva.spring.demo.ioc.jpa.repositories.AddressRepository;
@@ -43,6 +43,9 @@ public class PersonService implements IPersonService {
 
     @Transactional
     public void createPerson(String name){
+
+        applicationEventPublisher.publishEvent(new PersonRollBack());
+
         final Person person = personRepository.save(new Person(name));
         person.getPhoneNumbers().add(randomPhoneNumber());
         person.getPhoneNumbers().add(randomPhoneNumber());
@@ -50,8 +53,7 @@ public class PersonService implements IPersonService {
         addressRepository.save(address);
         person.getAddresses().add(address);
         personRepository.save(person);
-        personServiceHelper.updatePerson(person.getId());
-        //applicationEventPublisher.publishEvent(new PersonReadyEvent(person.getId()));
+        //throw new RuntimeException();
     }
 
     //@Transactional
