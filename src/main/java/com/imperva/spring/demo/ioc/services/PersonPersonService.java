@@ -13,9 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +36,12 @@ public class PersonPersonService implements IPersonService {
     public Person getPerson(Long id){
        return personRepository.findById(id).get();
     }
+
+    @Override
+    public long getPersonsCount() {
+        return personRepository.count();
+    }
+
     @Transactional
     public void createPersons() {
         IntStream.rangeClosed(1,10).forEach(i-> {
