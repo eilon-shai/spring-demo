@@ -28,14 +28,20 @@ public class PersonController {
 
     @PutMapping()
     @ResponseStatus(HttpStatus.OK)
-    public void newPerson(@RequestParam String name){
-        service.createPerson(name);
+    public void newPersons(){
+        service.createPersons();
     }
 
     @PostMapping()
     @ResponseStatus(HttpStatus.OK)
     public void editPerson(@RequestParam Long id){
         service.updatePerson(id);
+    }
+
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteAll(){
+        service.deleteAll();
     }
 
 

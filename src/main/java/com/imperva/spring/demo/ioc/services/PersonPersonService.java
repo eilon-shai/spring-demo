@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -18,6 +19,7 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 @Service
 public class PersonPersonService implements IPersonService {
@@ -36,18 +38,31 @@ public class PersonPersonService implements IPersonService {
     public Person getPerson(Long id){
        return personRepository.findById(id).get();
     }
-
-    public void createPerson(String name){
-        final Person person = personRepository.save(new Person(name));
-        person.getPhoneNumbers().add(randomPhoneNumber());
-        person.getPhoneNumbers().add(randomPhoneNumber());
-        final Address address = randomAddress(person);
-        addressRepository.save(address);
-        person.getAddresses().add(address);
-        personRepository.save(person);
+    @Transactional
+    public void createPersons() {
+        IntStream.rangeClosed(1,10).forEach(i-> {
+            personServiceHelper.createPerson();
+        });
     }
 
-    //@Transactional
+
+    @Transactional
+    public void createPerson(){
+        try {
+            Thread.sleep(3000);
+            final Person person = personRepository.save(new Person(randomName()));
+            person.getPhoneNumbers().add(randomPhoneNumber());
+            person.getPhoneNumbers().add(randomPhoneNumber());
+            final Address address = randomAddress(person);
+            addressRepository.save(address);
+            person.getAddresses().add(address);
+            personRepository.save(person);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional
     public void updatePerson(Long id){
         final Optional<Person> byId = personRepository.findById(id);
         byId.ifPresent(person -> {
@@ -62,6 +77,12 @@ public class PersonPersonService implements IPersonService {
                 e.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void deleteAll() {
+        addressRepository.deleteAll();
+        personRepository.deleteAll();
     }
 
     public void updateName(long id, String name){
@@ -101,15 +122,19 @@ public class PersonPersonService implements IPersonService {
     private static final String[] cities = {"Tokyo","Mumbai","Jerusalem"};
     private static final Random random = new Random();
 
-    private Address randomAddress(Person person){
+    public static Address randomAddress(Person person){
          String street =  RandomStringUtils.random(10, true, false);
          int number =  random.nextInt(30);
          String city = cities[random.nextInt(2)];
          return new Address(street, number, city, person);
     }
 
-    private String randomPhoneNumber(){
+    public static  String randomPhoneNumber(){
         return "050-" + RandomStringUtils.random(10, false, true);
+    }
+
+    public static  String randomName(){
+        return RandomStringUtils.random(5, true, false) + " " + RandomStringUtils.random(5, true, false);
     }
 
 

@@ -6,8 +6,10 @@ public interface IPersonService {
 
     Person getPerson(Long id);
 
-    void createPerson(String name);
+    void createPersons();
 
     void updatePerson(Long id);
+
+    void deleteAll();
 
 }
