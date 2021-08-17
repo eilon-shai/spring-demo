@@ -57,4 +57,14 @@ public class Person {
     public void setAddresses(Set<Address> addresses) {
         this.addresses = addresses;
     }
+
+    @Override
+    public String toString() {
+        return " { Person: {" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", addresses=" + addresses +
+                ", phoneNumbers=" + phoneNumbers +
+                '}';
+    }
 }

@@ -55,7 +55,7 @@ public class PersonPersonService implements IPersonService {
             final ExecutorService executorService = Executors.newFixedThreadPool(3);
             executorService.submit(()->updateName(person.getId(), value));
             executorService.submit(()->updatePhone(person.getId(), value));
-            executorService.submit(()->personServiceHelper.updateAddress(person.getId(), value));
+            executorService.submit(()->updateAddress(person.getId(), value));
             try {
                 executorService.awaitTermination(2, TimeUnit.SECONDS);
             } catch (InterruptedException e) {

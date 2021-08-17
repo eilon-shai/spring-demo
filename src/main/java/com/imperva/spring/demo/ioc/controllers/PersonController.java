@@ -23,7 +23,7 @@ public class PersonController {
     @GetMapping(produces = { "application/json" } )
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity getPerson(@RequestParam Long id){
-        return ResponseEntity.ok(new GsonBuilder().create().toJson(service.getPerson(id)));
+        return ResponseEntity.ok(service.getPerson(id).toString());
     }
 
     @PutMapping()
