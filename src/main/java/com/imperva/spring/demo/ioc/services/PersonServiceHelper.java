@@ -36,7 +36,7 @@ public class PersonServiceHelper {
         }
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional()
     public void createPerson(){
         try {
             Thread.sleep(3000);
