@@ -24,7 +24,7 @@ public class Component1 implements IComponent1 {
     private IService1 service1;
 
     @Autowired
-    public Component1(@Lazy IService1 service1) {
+    public Component1(IService1 service1) {
         this.service1 = service1;
         logger.info("component1 constructed");
     }
