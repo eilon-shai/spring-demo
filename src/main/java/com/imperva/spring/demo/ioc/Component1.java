@@ -16,7 +16,7 @@ public class Component1 implements IComponent1 {
 
     private static final Logger logger = LoggerFactory.getLogger( Component1.class );
 
-    @Autowired
+    //@Autowired
     private IService1 service1;
 
     /*@Autowired
