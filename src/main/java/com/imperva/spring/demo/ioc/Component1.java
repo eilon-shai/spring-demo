@@ -36,6 +36,8 @@ public class Component1 implements IComponent1 {
     @PostConstruct
     public void post(){
         logger.info("component1 init");
+        //logger.info(service1.toString());
+        logger.info("component1 done init");
     }
 
     @PreDestroy
